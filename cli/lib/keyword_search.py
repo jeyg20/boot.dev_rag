@@ -1,6 +1,6 @@
 import string
 
-from .search_utils import DEFAULT_SEARCH_LIMIT, load_movies
+from .search_utils import DEFAULT_SEARCH_LIMIT, load_movies, load_stop_word
 
 
 def search_command(query: str, limit: int = DEFAULT_SEARCH_LIMIT) -> list[dict]:
@@ -33,9 +33,5 @@ def preprocess_text(text: str) -> str:
 
 def tokenize_text(text: str) -> list[str]:
     text = preprocess_text(text)
-    tokens = text.split()
-    valid_tokens = []
-    for token in tokens:
-        if token:
-            valid_tokens.append(token)
-    return valid_tokens
+    stop_words = set(load_stop_word())
+    return [word for word in text.split() if word and word not in stop_words]

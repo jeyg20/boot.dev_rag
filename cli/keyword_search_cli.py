@@ -2,7 +2,7 @@
 
 import argparse
 
-from lib.keyword_search import search_command
+from lib.keyword_search import search_command, filter_stop_words
 
 
 def main() -> None:
